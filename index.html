@@ -77,7 +77,9 @@
 				l.href = '//fonts.googleapis.com/css?family=Open+Sans:400,700';
 				var att = document.createAttribute("async");
 				l.setAttributeNode(att); 
-				var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
+				var h = document.getElementsByTagName('head');
+				h.appendChild(l);
+				//var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
 			};
 		} else {
 		// HTML imports are not supported.
