@@ -6,9 +6,8 @@
     <meta name="description" content="Optimization Project Page">
     <meta name="author" content="Sylvia Schmidt">
     <title>Cameron Pittman: Portfolio</title>
-    <!--Hmm, what is the impact of web fonts on speed? Measure it... -->
+    <!--Hmm, what is the impact of web fonts on speed? Measure it...
     <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet"> 
-	<!-- 
 	<link href="css/style-480.css" rel="stylesheet" media="screen and (max-width: 480px)">
 	<link href="css/style.css" rel="stylesheet" media="screen">
     <link href="css/print.css" rel="stylesheet" media="print">
@@ -67,20 +66,13 @@
       ga('create', 'UA-XXXX-Y');
       ga('send', 'pageview');
     </script>
+	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
 	<script>
-	/*
-		var cb = function() {
-			var l = document.createElement('link');
-			l.rel = 'stylesheet';
-			l.href = '//fonts.googleapis.com/css?family=Open+Sans:400,700';
-			var h = document.getElementsByTagName('head')[0];
-			h.appendChild(l);
+		WebFontConfig = {
+			google: {
+				families: ['Open Sans:400,700']
+			}
 		};
-		var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-			webkitRequestAnimationFrame || msRequestAnimationFrame;
-		if (raf) raf(cb);
-		else window.addEventListener('load', cb);
-	*/
     </script>
     <script src="http://www.google-analytics.com/analytics.js" async></script>
     <script src="js/perfmatters.js" async></script>
