@@ -507,6 +507,11 @@ function updatePositions() {
   for (var i = 0; i < len; i++) {
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+	if (i < 2){
+		console.log('var phase: ' + phase);
+		console.log('var scroll: ' + (document.body.scrollTop / 1250));
+		console.log('var mod: ' + (i % 5));
+	}
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -525,17 +530,24 @@ window.addEventListener('scroll', updatePositions);
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
 	// Calculating instead of setting number of pizzas
-  var cols = 8;
-  var s = 256;
-  for (var i = 0; i < 200; i++) {
-    var elem = document.createElement('img');
-    elem.className = 'mover';
-    elem.src = "images/pizza.png";
-    elem.style.height = "100px";
-    elem.style.width = "73.333px";
-    elem.basicLeft = (i % cols) * s;
-    elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
-  }
-  updatePositions();
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+	var cols = Math.ceil(w / 256);
+	var rows = Math.ceil(h / 256);
+	var s = 256;
+	var numberPizzas = cols * rows;
+	
+	console.log('w: ' + w + ' h: ' + h + ' cols: ' + cols + ' rows: ' + rows + ' s: ' + s + ' num: ' + numberPizzas);
+	
+	for (var i = 0; i < numberPizzas; i++) {
+		var elem = document.createElement('img');
+		elem.className = 'mover';
+		elem.src = "images/pizza.png";
+		elem.style.height = "100px";
+		elem.style.width = "73.333px";
+		elem.basicLeft = (i % cols) * s;
+		elem.style.top = (Math.floor(i / cols) * s) + 'px';
+		document.querySelector("#movingPizzas1").appendChild(elem);
+	}
+	updatePositions();
 });
