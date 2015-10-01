@@ -501,11 +501,13 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
+  // Saved scrollTop into variabel for one per frame lookup.
+  var scroll = document.body.scrollTop;
 
-  var items = document.querySelectorAll('.mover');
+  var items = document.getElementsByClassName('mover');
   var len = items.length;
   for (var i = 0; i < len; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
+    var phase = Math.sin((scroll / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -524,13 +526,17 @@ window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-	// Calculating instead of setting number of pizzas
+	// Calculating instead of setting number of pizzas needed to cover the visible screen
+	// By dividing the screen into rows and collums of 256px height / width
+	// Rounding up (Math.ceil) to make sure patially visible pizza rows or collums are included.
 	var w = window.innerWidth;
 	var h = window.innerHeight;
 	var cols = Math.ceil(w / 256);
 	var rows = Math.ceil(h / 256);
 	var s = 256;
 	var numberPizzas = cols * rows;
+	var parent = document.getElementById('movingPizzas1');
+	
 	for (var i = 0; i < numberPizzas; i++) {
 		var elem = document.createElement('img');
 		elem.className = 'mover';
@@ -539,7 +545,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		elem.style.width = "73.333px";
 		elem.basicLeft = (i % cols) * s;
 		elem.style.top = (Math.floor(i / cols) * s) + 'px';
-		document.querySelector("#movingPizzas1").appendChild(elem);
+		parent.appendChild(elem);
 	}
 	updatePositions();
 });
